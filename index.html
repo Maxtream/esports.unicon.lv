@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, maximum-scale=1, width=device-width" />
+    <meta name="robots" content="all,index,follow" />
+    <meta name="description" content="UniCon eSports cup 2016 | Overwatch | Hearthstone | CS: Global Offensive" />
+    <meta name="author" content="Maxtream (https://www.maxorlovsky.com)" />
+
+    <title>UniCon eSports cup 2016 | Overwatch | Hearthstone | CS: Global Offensive</title>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/build/styles.css?v=1.10" />
+    
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Dosis:400,800" rel="stylesheet" type="text/css">
+
+    <base href="/">
+</head>
+
+<body ng-controller="MainController" ng-cloak ng-class="{'sidebar-open': parentObject.sidebar}">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-78789607-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <section class="sidebar-closer" ng-click="parentObject.sidebar = 0"></section>
+    <section class="sidebar" ng-include="'/app/views/sidebar.html'"></section>
+
+    <header>
+        <div class="wrapper">
+            <a href="/"></a>
+
+            <nav>
+                <ul>
+                    <li ng-repeat="link in links">
+                        <a ng-href="{{ link.url !== false ? link.url : '#' }}"
+                        ng-class="{'active': parentObject.currentPage == link.url}"
+                        ng-click="link.url !== false ? parentObject.sidebar = 0 : undefined"
+                        ng-attr-target="{{ link.external === true ? '_blank' : undefined }}">
+                            {{ ::link.value }}
+                        </a>
+                        <ul>
+                            <li>
+                                <a ng-href="{{ sublink.url !== false ? sublink.url : '#' }}"
+                                ng-repeat="sublink in link.subLinks"
+                                ng-class="{'active': parentObject.currentPage == sublink.url}"
+                                class="sublink"
+                                ng-click="sublink.url !== false ? parentObject.sidebar = 0 : undefined"
+                                ng-attr-target="{{ sublink.external === true ? '_blank' : undefined }}">
+                                    {{ ::sublink.value }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="burger" ng-click="parentObject.sidebar = 1">
+                <svg viewBox="0 0 32 32"  xmlns="http://www.w3.org/2000/svg"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/></svg>
+            </div>
+        </div>
+    </header>
+
+    <!--<div class="logo">
+        <img src="/assets/images/logo-header.png" alt="UniCon eSports" />
+    </div>-->
+
+    <section class="container" ng-view></section>
+
+    <footer>
+        <div class="partners">
+            <h6>Partners</h6>
+            <div>
+                <a href="http://www.lattelecom.lv/" target="_blank"><img src="/assets/images/partners/lattelecom.png" alt="Lattelecom" /></a>
+                <a href="http://www.redbull.com/lv" target="_blank"><img src="/assets/images/partners/redbull.png" alt="Red Bull" /></a>
+                <a class="ludus" href="http://ludus.lv/" target="_blank"><img src="/assets/images/partners/ludus.png" alt="Ludus" /></a>
+            </div>
+        </div>
+
+        <div class="partners info">
+            <h6>Information partners</h6>
+            <div>
+                <a href="http://skillz.lv" target="_blank"><img src="/assets/images/partners/skillz.png" alt="Skillz.Lv" /></a>
+                <a href="http://cswos.com" target="_blank"><img src="/assets/images/partners/wos.png" alt="CSWOS.COM - Counter-Strike 1.6" /></a>
+            </div>
+        </div>
+
+        <div class="lower">
+            <p class="copyright">UniCon Latvia {{ ::year }} &copy; "JAUNIEŠU BRĪVO INTEREŠU BIEDRĪBA".</p>
+
+            <div class="socials">
+                <a href="https://www.facebook.com/unicon.lv" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M182.594 0c-101.149 0 -182.594 81.445 -182.594 182.594l0 634.813c0 101.149 81.445 182.594 182.594 182.594l344.063 0l0 -390.938l-103.375 0l0 -140.75l103.375 0l0 -120.25c0 -94.475 61.079 -181.219 201.781 -181.219 56.968 0 99.094 5.469 99.094 5.469l-3.313 131.438s-42.963 -.406 -89.844 -.406c-50.739 0 -58.875 23.378 -58.875 62.188l0 102.781l152.75 0l-6.656 140.75l-146.094 0l0 390.938l141.906 0c101.149 0 182.594 -81.445 182.594 -182.594l0 -634.813c0 -101.149 -81.445 -182.594 -182.594 -182.594l-634.813 0z"/></svg></a>
+
+                <a href="https://www.twitter.com/uniconlv" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1231 1000"><path d="M1231.052 118.453q-51.422 76.487 -126.173 130.403 .738 14.46 .738 32.687 0 101.273 -29.53 202.791 -29.53 101.519 -90.215 194.343 -60.685 92.824 -144.574 164.468 -83.889 71.644 -201.677 114.25 -117.788 42.606 -252.474 42.606 -210.2 0 -387.147 -113.493 31.406 3.495 60.242 3.495 175.605 0 313.687 -108.177 -81.877 -1.501 -146.654 -50.409 -64.777 -48.907 -89.156 -124.988 24.097 4.59 47.566 4.59 33.782 0 66.482 -8.812 -87.378 -17.5 -144.975 -87.04 -57.595 -69.539 -57.595 -160.523l0 -3.126q53.633 29.696 114.416 31.592 -51.762 -34.508 -82.079 -89.999 -30.319 -55.491 -30.319 -120.102 0 -68.143 34.151 -126.908 95.022 116.607 230.278 186.392 135.258 69.786 290.212 77.514 -6.609 -27.543 -6.621 -57.485 0 -104.546 73.994 -178.534 73.995 -73.988 178.541 -73.988 109.456 0 184.392 79.711 85.618 -16.959 160.333 -61.349 -28.785 90.59 -110.933 139.768 75.502 -8.972 145.088 -39.677z"/></svg></a>
+
+                <a href="https://www.youtube.com/user/UniConLv"  target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M233.709,295.811h14.537v78.188h-14.537v-8.631c-2.68,3.181-5.465,5.604-8.363,7.268  c-7.836,4.488-18.594,4.392-18.594-11.473v-65.352h14.538v59.936c0,3.146,0.763,5.27,3.872,5.27c2.833,0,6.773-3.635,8.547-5.855  V295.811z M206.951,268.006h-50.245v15.384h16.937v90.608h16.371V283.39h16.938V268.006z M304.207,314.422v43.377  c0,9.674-3.619,17.188-13.291,17.188c-5.323,0-9.756-1.945-13.809-6.998v6.01H262.43V268.006h14.678v34.122  c3.281-3.997,7.734-7.306,12.926-7.306C300.681,294.822,304.207,303.816,304.207,314.422z M289.245,315.302  c0-2.638-0.517-4.64-1.554-6.008c-1.758-2.321-5.042-2.571-7.586-1.284c-1.013,0.514-2.011,1.31-2.998,2.383v48.725  c1.184,1.271,2.33,2.188,3.441,2.748c2.365,1.198,5.836,1.293,7.438-0.805c0.838-1.1,1.259-2.896,1.259-5.389V315.302z   M246.938,209.69c4.106,0,6.385-3.303,6.385-7.773v-38.188c0-4.594-2.004-7.829-6.685-7.829c-4.288,0-6.356,3.335-6.356,7.829  v38.188C240.281,206.242,242.721,209.69,246.938,209.69z M462,100v312c0,27.614-22.385,50-50,50H100c-27.613,0-50-22.386-50-50V100  c0-27.614,22.387-50,50-50h312C439.615,50,462,72.386,462,100z M281.84,209.615c0,8.11,2.479,14.665,10.662,14.665  c4.618,0,11.028-2.403,17.643-10.249v9.063h15.264v-82.099h-15.264v62.317c-1.86,2.33-5.999,6.148-8.975,6.148  c-3.268,0-4.066-2.229-4.066-5.531v-62.934H281.84V209.615z M224.572,162.375v40.242c0,14.468,7.561,22,22.365,22  c12.275,0,21.944-8.21,21.944-22v-40.242c0-12.85-9.571-22.056-21.944-22.056C233.494,140.319,224.572,149.203,224.572,162.375z   M167.703,111.8l20.451,66.153v45.14h17.191v-45.14l20.006-66.153h-17.467l-11.014,44.485L185.018,111.8H167.703z M380.961,276.779  c0-19.331-15.67-35.001-35-35.001H166.039c-19.33,0-35,15.67-35,35.001V365.2c0,19.33,15.67,35,35,35h179.922  c19.33,0,35-15.67,35-35V276.779z M357.938,316.831v19.906h-27.805v14.75c0,5.865,0.496,10.938,6.349,10.938  c6.137,0,6.494-4.13,6.494-10.938v-5.435h14.962v5.873c0,15.066-6.467,24.189-21.786,24.189c-13.881,0-20.979-10.113-20.979-24.189  v-35.095c0-13.573,8.967-22.997,22.08-22.997C351.198,293.834,357.938,302.699,357.938,316.831z M342.976,316.686  c0-5.283-1.12-9.163-6.349-9.163c-5.387,0-6.494,3.79-6.494,9.163v7.916h12.843V316.686z"/></svg></a>
+
+                <a href="https://www.twitch.tv/unicon_latvia" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><path d="M 26.117188 0 L 6.550781 52.175781 L 6.550781 260.851562 L 78.257812 260.851562 L 78.257812 300 L 117.402344 300 L 156.511719 260.851562 L 215.191406 260.851562 L 293.449219 182.621094 L 293.449219 0 Z M 52.183594 26.070312 L 267.371094 26.070312 L 267.371094 169.550781 L 221.714844 215.210938 L 150 215.210938 L 110.902344 254.308594 L 110.902344 215.210938 L 52.183594 215.210938 Z M 52.183594 26.070312 "/><path d="M 123.914062 156.527344 L 150 156.527344 L 150 78.273438 L 123.914062 78.273438 Z M 195.636719 156.527344 L 221.714844 156.527344 L 221.714844 78.273438 L 195.636719 78.273438 Z M 195.636719 156.527344 "/></svg></a>
+
+                <a href="https://www.instagram.com/uniconlv/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M341.205,197.143H460.93v183.795c0,44.77-36.292,81.062-81.062,81.062H132.133   c-44.769,0-81.062-36.293-81.062-81.062V197.143H170.26c-12.2,17.141-19.399,38.087-19.399,60.729   c0,57.919,46.953,104.872,104.873,104.872c57.919,0,104.872-46.953,104.872-104.872   C360.605,235.229,353.405,214.283,341.205,197.143z M460.93,131.062v53.239H330.447c-19.022-19.315-45.465-31.302-74.714-31.302   c-29.251,0-55.693,11.986-74.714,31.302H51.07v-53.239c0-27.322,13.532-51.469,34.245-66.154v87.289h16.62v-96.36   c3.77-1.516,7.679-2.752,11.704-3.691v100.052h16.621V50.047c0.625-0.015,1.245-0.047,1.873-0.047h9.598v102.196h16.62V50h221.517   C424.638,50,460.93,86.292,460.93,131.062z M423.879,96.897c0-7.181-5.822-13.002-13.003-13.002h-43.821   c-7.183,0-13.003,5.821-13.003,13.002v44.785c0,7.181,5.82,13.002,13.003,13.002h43.821c7.181,0,13.003-5.821,13.003-13.002V96.897z    M174.938,257.872c0-24.188,10.698-45.909,27.593-60.729c5.926-5.197,12.613-9.539,19.875-12.842   c10.169-4.625,21.447-7.224,33.327-7.224c11.881,0,23.157,2.599,33.326,7.224c7.263,3.303,13.95,7.645,19.876,12.842   c16.895,14.82,27.592,36.542,27.592,60.729c0,44.55-36.243,80.794-80.794,80.794C211.183,338.666,174.938,302.422,174.938,257.872z    M196.286,257.872c0,32.979,26.735,59.712,59.714,59.712c32.979,0,59.713-26.733,59.713-59.712c0-32.98-26.733-59.713-59.713-59.713   C223.021,198.159,196.286,224.892,196.286,257.872z"/></svg></a>
+            </div>
+
+            <p class="developer">Developed by <a href="https://maxorlovsky.com" target="_blank">Max Orlovsky</a></p>
+        </div>
+    </footer>
+	
+    <script src="/assets/build/scripts.js?v=1.2" async></script>
+    <script src="//maps.google.com/maps/api/js?key=AIzaSyD73GiGOJOnKa936gzCz1dqQ_1qJzbmggM"></script>
+</body>
+</html>

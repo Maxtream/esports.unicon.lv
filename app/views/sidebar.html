@@ -1,0 +1,21 @@
+<button class="back" ng-click="parentObject.sidebar = 0">X</button>
+
+<nav>
+	<div ng-repeat="link in links">
+		<a ng-href="{{ link.url !== false ? link.url : '#' }}"
+		ng-class="{'active': parentObject.currentPage == link.url}"
+		ng-click="link.url !== false ? parentObject.sidebar = 0 : undefined"
+		ng-attr-target="{{ link.external === true ? '_blank' : undefined }}">
+		    {{ ::link.value }}
+		</a>
+
+		<a ng-href="{{ sublink.url !== false ? sublink.url : '#' }}"
+		ng-repeat="sublink in link.subLinks"
+		ng-class="{'active': parentObject.currentPage == sublink.url}"
+	    class="sublink"
+	    ng-click="sublink.url !== false ? parentObject.sidebar = 0 : undefined"
+	    ng-attr-target="{{ sublink.external === true ? '_blank' : undefined }}">
+	    	{{ ::sublink.value }}
+	    </a>
+	</div>
+</nav>
